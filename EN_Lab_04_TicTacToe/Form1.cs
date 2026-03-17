@@ -14,7 +14,9 @@ namespace EN_Lab_04_TicTacToe
     {
         private const int boardSize = 3;
         private const int fieldSize = 150;
+        private Button[,] board;
         private bool isX;
+        
         public Form1()
         {
             InitializeComponent();
@@ -27,6 +29,7 @@ namespace EN_Lab_04_TicTacToe
 
         private void PrepareNewGame()
         {
+            board = new Button[boardSize, boardSize];
             isX = true;
 
             for (int column = 0; column< boardSize; column++)
@@ -37,6 +40,8 @@ namespace EN_Lab_04_TicTacToe
 
                     b.Size = new Size(fieldSize, fieldSize);
                     b.Location = new Point(column * fieldSize, row * fieldSize);
+
+                    board[column, row] = b;
 
                     b.Click += B_Click;
 
@@ -54,8 +59,19 @@ namespace EN_Lab_04_TicTacToe
                 {
                     b.Text = (isX ? "X" : "O");
                     isX = !isX;
+
+                    if(isWinner(b.Text))
+                    {
+                        MessageBox.Show($"The Winner is {b.Text}!");
+                    }
+
                 }
             }
+        }
+
+        private bool isWinner(string text)
+        {
+            throw new NotImplementedException();
         }
     }
 }
