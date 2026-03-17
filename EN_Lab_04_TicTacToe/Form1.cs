@@ -87,6 +87,52 @@ namespace EN_Lab_04_TicTacToe
                     return true;
                 }
             }
+            //check rows
+            for (int row = 0; row < boardSize; row++)
+            {
+                int count = 0;
+                for (int column = 0; column < boardSize; column++)
+                {
+                    if (board[row, column].Text == player)
+                    {
+                        count++;
+                    }
+                }
+                if (count == boardSize)
+                {
+                    return true;
+                }
+            }
+            //check main/primary diagonal
+            {
+                int count = 0;
+                for (int n = 0; n < boardSize; n++)
+                {
+                    if (board[n, n].Text == player)
+                    {
+                        count++;
+                    }
+                }
+                if (count == boardSize)
+                {
+                    return true;
+                }
+            }
+            //check reverse/secondary diagonal
+            {
+                int count = 0;
+                for (int n = 0; n < boardSize; n++)
+                {
+                    if (board[n, boardSize - 1 - n].Text == player)
+                    {
+                        count++;
+                    }
+                }
+                if (count == boardSize)
+                {
+                    return true;
+                }
+            }
 
             return false;
         }
