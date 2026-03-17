@@ -31,6 +31,8 @@ namespace EN_Lab_04_TicTacToe
         {
             board = new Button[boardSize, boardSize];
             isX = true;
+            //delete old buttons from previous game
+            this.Controls.Clear();
 
             for (int column = 0; column < boardSize; column++)
             {
@@ -62,7 +64,7 @@ namespace EN_Lab_04_TicTacToe
 
                     if (isWinner(b.Text))
                     {
-                        MessageBox.Show($"The Winner is {b.Text}!");
+                        ShowMessageBox($"The Winner is {b.Text}!");
                         return;
                     }
 
@@ -77,10 +79,24 @@ namespace EN_Lab_04_TicTacToe
 
                     if (count == boardSize * boardSize)
                     {
-                        MessageBox.Show($"The End Game without Winner!");
+                        ShowMessageBox($"The End Game without Winner!");
                         return;
                     }
                 }
+            }
+        }
+
+        private void ShowMessageBox(String text)
+        {
+            if (MessageBox.Show(text,
+                                "Do you want to play again?",
+                                MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                PrepareNewGame();
+            }
+            else
+            {
+                this.Close();
             }
         }
 
