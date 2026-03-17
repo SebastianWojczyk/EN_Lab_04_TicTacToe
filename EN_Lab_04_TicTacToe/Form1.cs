@@ -63,8 +63,23 @@ namespace EN_Lab_04_TicTacToe
                     if (isWinner(b.Text))
                     {
                         MessageBox.Show($"The Winner is {b.Text}!");
+                        return;
                     }
 
+                    int count = 0;
+                    foreach (Button tmp in this.Controls)
+                    {
+                        if (tmp.Text != "")
+                        {
+                            count++;
+                        }
+                    }
+
+                    if (count == boardSize * boardSize)
+                    {
+                        MessageBox.Show($"The End Game without Winner!");
+                        return;
+                    }
                 }
             }
         }
