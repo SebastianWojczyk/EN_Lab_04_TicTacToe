@@ -16,7 +16,7 @@ namespace EN_Lab_04_TicTacToe
         private const int fieldSize = 150;
         private Button[,] board;
         private bool isX;
-        
+
         public Form1()
         {
             InitializeComponent();
@@ -32,16 +32,16 @@ namespace EN_Lab_04_TicTacToe
             board = new Button[boardSize, boardSize];
             isX = true;
 
-            for (int column = 0; column< boardSize; column++)
+            for (int column = 0; column < boardSize; column++)
             {
-                for(int row = 0; row < boardSize; row++)
+                for (int row = 0; row < boardSize; row++)
                 {
                     Button b = new Button();
 
                     b.Size = new Size(fieldSize, fieldSize);
                     b.Location = new Point(column * fieldSize, row * fieldSize);
 
-                    board[column, row] = b;
+                    board[row, column] = b;
 
                     b.Click += B_Click;
 
@@ -60,7 +60,7 @@ namespace EN_Lab_04_TicTacToe
                     b.Text = (isX ? "X" : "O");
                     isX = !isX;
 
-                    if(isWinner(b.Text))
+                    if (isWinner(b.Text))
                     {
                         MessageBox.Show($"The Winner is {b.Text}!");
                     }
@@ -69,9 +69,26 @@ namespace EN_Lab_04_TicTacToe
             }
         }
 
-        private bool isWinner(string text)
+        private bool isWinner(string player)
         {
-            throw new NotImplementedException();
+            //check columns
+            for (int column = 0; column < boardSize; column++)
+            {
+                int count = 0;
+                for (int row = 0; row < boardSize; row++)
+                {
+                    if (board[row, column].Text == player)
+                    {
+                        count++;
+                    }
+                }
+                if (count == boardSize)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }
